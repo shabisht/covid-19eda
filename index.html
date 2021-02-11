@@ -1,0 +1,39 @@
+<head>
+    <!-- <style>
+        .inner1{
+                background-color: #167acd;
+                border-radius:80px;
+                text-align: center;
+                color:white;
+                width: 80%;
+                display: inline-block;
+        }
+    </style> -->
+</head>
+<body>
+    <!-- <div style="text-align: center;">
+     <div class="inner1">
+         <h1> Sorry the ChatBot feature is not yet deployed on server</h1>
+         <h3> can only be run on your local server</h3>
+        </div>
+    </div> -->
+    <div id="webchat">
+        <script src="https://storage.googleapis.com/mrbot-cdn/webchat-latest.js"></script>
+        <script>
+            WebChat.default.init({
+                selector: "#webchat",
+                initPayload: "Hello this is COBot. Welcome to the Chat",
+                interval: 1000, // 1000 ms between each message
+                customData: { "sender": "django" }, // arbitrary custom data. Stay minimal as this will be added to the socket
+                socketUrl: "http://localhost:5005",
+                title: "COBot",
+                subtitle: "Your COVID-19 Bot",
+                profileAvatar: "https://rasa.com/assets/img/demo/rasa_avatar.png",
+                showCloseButton: true,
+                fullScreenMode: true,
+                hideWhenNotConnected: false,
+            })
+        </script>
+    </div>
+
+</body>
