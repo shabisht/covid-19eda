@@ -518,7 +518,7 @@ st.sidebar.info(
     	contribute your awesome comments, questions, pull request
     	to make this app better.
 
-    	- You can find the [Source Code](https://github.com/peskyji/covid-19) 
+    	- You can find the [Source Code](https://github.com/peskyji/covid-19eda) 
     	here.
      ''')
 
