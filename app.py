@@ -179,7 +179,8 @@ def plot_world_data(df):
 
 	st.write(fig)
 
-
+# sets layout to full width
+# st.set_page_config(layout="wide")
 data_global = load_data_global()
 # allStatesData = load_data_india()
 country_grp = data_global.groupby("countriesAndTerritories")
