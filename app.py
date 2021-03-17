@@ -12,14 +12,22 @@ import calendar
 
 @st.cache(persist=True)
 def load_data_global():
-	URL = "https://opendata.ecdc.europa.eu/covid19/casedistribution/csv"
+	URL = "https://covid19.who.int/WHO-COVID-19-global-data.csv"
 	df = pd.read_csv(URL)
-	df['dateRep'] = pd.to_datetime(df['dateRep'] , format = "%d/%m/%Y")
-	df = df.rename(columns = {'cases_weekly':'cases', 'deaths_weekly':'deaths'})
-	df['year'] = pd.DatetimeIndex(df['dateRep']).year
-	df['month'] = pd.DatetimeIndex(df['dateRep']).month
-	filt1 = df.continentExp == 'Other'
-	df = df.drop(index = df[filt1].index)
+
+	df = df.rename(columns = {'Date_reported':'date', 'Country':'location', 'Cumulative_cases':'cases', 'Cumulative_deaths':'deaths'})
+	
+	# adding continent and iso3_code
+	df2 = pd.read_csv("Continent_iso3.csv")
+	df = df.set_index('location').join(df2.set_index('location'))
+
+	# above line will make location as index but we have to make it a column again
+	df = df.reset_index()
+
+	df['date'] = pd.to_datetime(df['date'] , format = "%Y-%m-%d")
+	df['year'] = pd.DatetimeIndex(df['date']).year
+	df['month'] = pd.DatetimeIndex(df['date']).month
+	
 	return df
 
 @st.cache(persist=True)
@@ -46,17 +54,17 @@ def load_data_india():
 	# df = df.drop(index = [len(df)-1,len(df)-2])
 
 def plotBarFunc(df):
-	df = df.sort_values(by="cases", ascending=False)
+	df = df.sort_values(by="New_cases", ascending=False)
 	fig = go.Figure()
 	fig.add_trace(go.Bar(
 	    x=df.index,
-	    y=df.cases,
+	    y=df.New_cases,
 	    name='Confirmed',
 	    marker_color='ORANGE'
 	))
 	fig.add_trace(go.Bar(
 	    x=df.index,
-	    y=df.deaths,
+	    y=df.New_deaths,
 	    name='Deceased',
 	    marker_color='PURPLE'
 	))
@@ -74,11 +82,11 @@ def plotBarFunc(df):
 
 def plot_country_map(countries,continent,figure):
 
-	countries = [x.replace('_',' ') for x in countries]
-	text,title,z = 'Deceased','No. of Deaths',np.array(figure.deaths)
+	# countries = [x.replace('_',' ') for x in countries]
+	text,title,z = 'Deceased','No. of Deaths',np.array(figure.New_deaths)
 
 	if(get_status() == "Confirmed Cases"):
-		text,title,z = 'Confirmed','No. of Confirmed Cases',np.array(figure.cases)
+		text,title,z = 'Confirmed','No. of Confirmed Cases',np.array(figure.New_cases)
 
 	data = dict(type = 'choropleth',
             locations = countries,
@@ -149,10 +157,10 @@ def plot_states(df , caseType):
 
 def plot_world_data(df):
 	fig = go.Figure(data=go.Choropleth(
-    locations = df.countryterritoryCode,
-    z = df.cases,
+    locations = df.iso_code,
+    z = df.New_cases,
     text = df.index,
-    colorscale = 'brbg',
+    colorscale = 'magma',
     autocolorscale=False,
     reversescale=True,
     marker_line_color='darkgray',
@@ -182,8 +190,9 @@ def plot_world_data(df):
 # sets layout to full width
 # st.set_page_config(layout="wide")
 data_global = load_data_global()
+#print(data_global)
 # allStatesData = load_data_india()
-country_grp = data_global.groupby("countriesAndTerritories")
+country_grp = data_global.groupby("location")
 
 #--------------- CSS properties---------------------------------------------------------------------
 st.markdown('''
@@ -233,8 +242,8 @@ with st.spinner(f"{selection} ANALYSIS ..."):
 	#----------------------World Analysis-----------------------------------------------------
 	if selection == 'WORLD':
 		st.title("COVID-19 Global Dashboard")
-		confirm = int(data_global.cases.sum())
-		death = int(data_global.deaths.sum())
+		confirm = int(data_global.New_cases.sum())
+		death = int(data_global.New_deaths.sum())
 
 		div_box = ''' <br>
 					<div class='outer'>
@@ -264,14 +273,14 @@ with st.spinner(f"{selection} ANALYSIS ..."):
 			st.markdown(msg, unsafe_allow_html=True)
 
 			if st.checkbox("See the Map", False, key='world_map'):
-				df = country_grp[['cases','deaths']].sum()
-				df = df.merge(country_grp.first().countryterritoryCode , left_index=True, right_index=True)
+				df = country_grp[['New_cases','New_deaths']].sum()
+				df = df.merge(country_grp.first().iso_code , left_index=True, right_index=True)
 				plot_world_data(df)
 				
 		elif options == "Continents Affected":
-			continent_grp = data_global.groupby("continentExp")
-			figure = continent_grp[['cases','deaths']].sum()
-
+			continent_grp = data_global.groupby("continent")
+			figure = continent_grp[['New_cases','New_deaths']].sum()
+			#print(continent_grp.first())
 			list_cont = ['All']
 			list_cont.extend(sorted(figure.index.to_list()))
 			
@@ -281,20 +290,20 @@ with st.spinner(f"{selection} ANALYSIS ..."):
 
 			if select != 'All':
 				list_cntry = ['All']
-				list_cntry.extend(continent_grp.get_group(select).countriesAndTerritories.unique())
+				list_cntry.extend(continent_grp.get_group(select).location.unique())
 
 				country = st.sidebar.selectbox("Select Country",list_cntry)
 				
-				figure = data_global.groupby(['continentExp','countriesAndTerritories'])
+				figure = data_global.groupby(['continent','location'])
 				
 				status = st.radio("See the count of",("Confirmed Cases","No. of Deaths"))
 
 				if country == 'All':
-					figure = figure[['cases','deaths']].sum().loc[(select), :]
+					figure = figure[['New_cases','New_deaths']].sum().loc[(select), :]
 					plot_country_map(list_cntry[1:],select,figure)
 
 				else:
-					figure = figure[['cases','deaths']].sum().loc[(select,country)]
+					figure = figure[['New_cases','New_deaths']].sum().loc[(select,country)]
 					plot_country_map([country],select,figure)
 
 			else:
@@ -310,8 +319,8 @@ with st.spinner(f"{selection} ANALYSIS ..."):
 			st.title("Top Affected Countries In The World")
 			status2 = st.radio("See the count of",("Confirmed Cases","No. of Deaths"),key='num')
 			number = st.sidebar.slider("no. of countries", 10, 20)
-			country_cases = country_grp.cases.sum().nlargest(number)
-			country_deaths = country_grp.deaths.sum().nlargest(number)
+			country_cases = country_grp.New_cases.sum().nlargest(number)
+			country_deaths = country_grp.New_deaths.sum().nlargest(number)
 
 			if(get_status2() == "Confirmed Cases"):
 				draw_scatter(country_cases)
@@ -361,21 +370,25 @@ with st.spinner(f"{selection} ANALYSIS ..."):
 		ind_grp = country_grp.get_group("India")
 		st.title("COVID-19 Outbreak in India")
 		st.sidebar.markdown("## CATEGORIES")
-		choice = st.sidebar.radio("",("Weekly Analysis","Monthwise Analysis","State/UT-Wise"), key="wise")
+		choice = st.sidebar.radio("",("Daywise Analysis","Monthwise Analysis","State/UT-Wise"), key="wise")
 
-		if choice == "Weekly Analysis":
+		if choice == "Daywise Analysis":
 			status3 = st.radio("See the count of",("Confirmed Cases","No. of Deaths"),key='Daywise')
 			
-			case_or_death, name, title = ind_grp['deaths'], 'deaths per week', 'COVID-19 Daywise deaths'
+			case_or_death, name, title = ind_grp['New_deaths'], 'deaths per day', 'COVID-19 Daywise deaths'
 			
 			if status3 == "Confirmed Cases":
-				case_or_death, name, title = ind_grp['cases'], 'new cases per week', 'COVID-19 Daywise Confirmed Cases'
+				case_or_death, name, title = ind_grp['New_cases'], 'new cases per day', 'COVID-19 Daywise Confirmed Cases'
 
-			fig = go.Figure(go.Scatter(x = ind_grp['dateRep'], y = case_or_death,name=name))
+			fig = px.line(ind_grp, x='date', y=case_or_death, title=name)
 
-			fig.update_layout(title=title,
-			                   plot_bgcolor='#FFEEFF', colorway = ['#000000'],
-			                   showlegend=True,)
+			fig.update_xaxes(rangeslider_visible=True)
+
+			# fig = go.Figure(go.Scatter(x = ind_grp['date'], y = case_or_death,name=name))
+
+			# fig.update_layout(title=title,
+			#                    plot_bgcolor='#FFEEFF', colorway = ['#000000'],
+			#                    showlegend=True,)
 
 			st.write(fig)
 
@@ -506,7 +519,7 @@ st.sidebar.info(
 
     	It is taken from the following sources
     	#### WORLD
-    	- [ECDC](https://opendata.ecdc.europa.eu/covid19/casedistribution)
+    	- [OurWorldInData](https://covid.ourworldindata.org/data/)
     	#### INDIA
     	- [Covid19India](https://covid19india.org/)
      ''')

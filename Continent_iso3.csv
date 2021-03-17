@@ -1,0 +1,195 @@
+location,continent,iso_code
+Algeria,Africa,DZA
+Angola,Africa,AGO
+Benin,Africa,BEN
+Botswana,Africa,BWA
+Burkina,Africa,
+Burundi,Africa,BDI
+Cameroon,Africa,CMR
+Cape Verde,Africa,CPV
+Central African Republic,Africa,CAF
+Chad,Africa,TCD
+Comoros,Africa,COM
+Congo,Africa,COG
+"Congo, Democratic Republic of",Africa,
+Djibouti,Africa,DJI
+Egypt,Africa,EGY
+Equatorial Guinea,Africa,GNQ
+Eritrea,Africa,ERI
+Ethiopia,Africa,ETH
+Gabon,Africa,GAB
+Gambia,Africa,GMB
+Ghana,Africa,GHA
+Guinea,Africa,GIN
+Guinea-Bissau,Africa,GNB
+Ivory Coast,Africa,CIV
+Kenya,Africa,KEN
+Lesotho,Africa,LSO
+Liberia,Africa,LBR
+Libya,Africa,LBY
+Madagascar,Africa,MDG
+Malawi,Africa,MWI
+Mali,Africa,MLI
+Mauritania,Africa,MRT
+Mauritius,Africa,MUS
+Morocco,Africa,MAR
+Mozambique,Africa,MOZ
+Namibia,Africa,NAM
+Niger,Africa,NER
+Nigeria,Africa,NGA
+Rwanda,Africa,RWA
+Sao Tome and Principe,Africa,STP
+Senegal,Africa,SEN
+Seychelles,Africa,SYC
+Sierra Leone,Africa,SLE
+Somalia,Africa,SOM
+South Africa,Africa,ZAF
+South Sudan,Africa,SSD
+Sudan,Africa,SDN
+Swaziland,Africa,SWZ
+Tanzania,Africa,TZA
+Togo,Africa,TGO
+Tunisia,Africa,TUN
+Uganda,Africa,UGA
+Zambia,Africa,ZMB
+Zimbabwe,Africa,ZWE
+Afghanistan,Asia,AFG
+Bahrain,Asia,BHR
+Bangladesh,Asia,BGD
+Bhutan,Asia,BTN
+Brunei,Asia,BRN
+Burma (Myanmar),Asia,
+Cambodia,Asia,KHM
+China,Asia,CHN
+East Timor,Asia,
+India,Asia,IND
+Indonesia,Asia,IDN
+Iran,Asia,IRN
+Iraq,Asia,IRQ
+Israel,Asia,ISR
+Japan,Asia,JPN
+Jordan,Asia,JOR
+Kazakhstan,Asia,KAZ
+"Korea, North",Asia,PRK
+"Korea, South",Asia,KOR
+Kuwait,Asia,KWT
+Kyrgyzstan,Asia,KGZ
+Laos,Asia,
+Lebanon,Asia,LBN
+Malaysia,Asia,MYS
+Maldives,Asia,MDV
+Mongolia,Asia,MNG
+Nepal,Asia,NPL
+Oman,Asia,OMN
+Pakistan,Asia,PAK
+Philippines,Asia,PHL
+Qatar,Asia,QAT
+Russian Federation,Asia,RUS
+Saudi Arabia,Asia,SAU
+Singapore,Asia,SGP
+Sri Lanka,Asia,LKA
+Syria,Asia,
+Tajikistan,Asia,TJK
+Thailand,Asia,THA
+Turkey,Asia,TUR
+Turkmenistan,Asia,TKM
+United Arab Emirates,Asia,ARE
+Uzbekistan,Asia,UZB
+Vietnam,Asia,VNM
+Yemen,Asia,YEM
+Albania,Europe,ALB
+Andorra,Europe,AND
+Armenia,Europe,ARM
+Austria,Europe,AUT
+Azerbaijan,Europe,AZE
+Belarus,Europe,BLR
+Belgium,Europe,BEL
+Bosnia and Herzegovina,Europe,BIH
+Bulgaria,Europe,BGR
+Croatia,Europe,HRV
+Cyprus,Europe,CYP
+CZ,Europe,
+Denmark,Europe,DNK
+Estonia,Europe,EST
+Finland,Europe,FIN
+France,Europe,FRA
+Georgia,Europe,GEO
+Germany,Europe,DEU
+Greece,Europe,GRC
+Hungary,Europe,HUN
+Iceland,Europe,ISL
+Ireland,Europe,IRL
+Italy,Europe,ITA
+Latvia,Europe,LVA
+Liechtenstein,Europe,LIE
+Lithuania,Europe,LTU
+Luxembourg,Europe,LUX
+Macedonia,Europe,
+Malta,Europe,MLT
+Moldova,Europe,
+Monaco,Europe,MCO
+Montenegro,Europe,MNE
+Netherlands,Europe,NLD
+Norway,Europe,NOR
+Poland,Europe,POL
+Portugal,Europe,PRT
+Romania,Europe,ROU
+San Marino,Europe,SMR
+Serbia,Europe,SRB
+Slovakia,Europe,SVK
+Slovenia,Europe,SVN
+Spain,Europe,ESP
+Sweden,Europe,SWE
+Switzerland,Europe,CHE
+Ukraine,Europe,UKR
+United Kingdom,Europe,GBR
+Vatican City,Europe,
+Antigua and Barbuda,North America,ATG
+Bahamas,North America,BHS
+Barbados,North America,BRB
+Belize,North America,BLZ
+Canada,North America,CAN
+Costa Rica,North America,CRI
+Cuba,North America,CUB
+Dominica,North America,DMA
+Dominican Republic,North America,DOM
+El Salvador,North America,SLV
+Grenada,North America,GRD
+Guatemala,North America,GTM
+Haiti,North America,HTI
+Honduras,North America,HND
+Jamaica,North America,JAM
+Mexico,North America,MEX
+Nicaragua,North America,NIC
+Panama,North America,PAN
+Saint Kitts and Nevis,North America,KNA
+Saint Lucia,North America,LCA
+Saint Vincent and the Grenadines,North America,VCT
+Trinidad and Tobago,North America,TTO
+United States of America,North America,USA
+Australia,Oceania,AUS
+Fiji,Oceania,FJI
+Kiribati,Oceania,KIR
+Marshall Islands,Oceania,MHL
+Micronesia,Oceania,
+Nauru,Oceania,NRU
+New Zealand,Oceania,NZL
+Palau,Oceania,PLW
+Papua New Guinea,Oceania,PNG
+Samoa,Oceania,WSM
+Solomon Islands,Oceania,SLB
+Tonga,Oceania,TON
+Tuvalu,Oceania,TUV
+Vanuatu,Oceania,VUT
+Argentina,South America,ARG
+Bolivia,South America,BOL
+Brazil,South America,BRA
+Chile,South America,CHL
+Colombia,South America,COL
+Ecuador,South America,ECU
+Guyana,South America,GUY
+Paraguay,South America,PRY
+Peru,South America,PER
+Suriname,South America,SUR
+Uruguay,South America,URY
+Venezuela,South America,VEN
