@@ -1,0 +1,6 @@
+[server]
+maxUploadSize = 400
+[theme]
+base="light"
+backgroundColor="#dad5d7"
+secondaryBackgroundColor="#efe7e9"
