@@ -309,7 +309,7 @@ with st.spinner(f"{selection} ANALYSIS ..."):
 			else:
 				plotBarFunc(figure);
 
-			if st.checkbox("See figures",False):
+			if st.checkbox("See figures",False, key="key1"):
 				st.subheader("Confirmed and Deceased cases in Different Continents")
 				st.table(figure)
 		#--------------------------------------------------------------------------------------------
@@ -439,7 +439,7 @@ with st.spinner(f"{selection} ANALYSIS ..."):
 				temp_df = web_df.sort_values(by='Recovered' , ascending = False)
 				plot_states(temp_df.iloc[0:num2],'r')
 
-			if st.checkbox("See figures",False, key="statewise"):
+			if st.checkbox("See figures",False, key="statewisee"):
 				st.subheader("Statewise Data")
 				st.table(web_df)
 
