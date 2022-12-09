@@ -519,7 +519,7 @@ st.sidebar.info(
 
     	It is taken from the following sources
     	#### WORLD
-    	- [OurWorldInData](https://covid.ourworldindata.org/data/)
+    	- [WHO COVID-19](https://covid19.who.int/data)
     	#### INDIA
     	- [Covid19India](https://covid19india.org/)
      ''')
