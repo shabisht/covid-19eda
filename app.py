@@ -163,7 +163,7 @@ def plot_world_data(df):
     locations = df.iso_code,
     z = df.New_cases,
     text = df.index,
-    colorscale = 'blugrn',
+    colorscale = 'pubugn',
     autocolorscale=False,
     reversescale=True,
     marker_line_color='darkgray',
