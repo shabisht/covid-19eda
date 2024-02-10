@@ -13,7 +13,10 @@ import calendar
 @st.cache(persist=True)
 def load_data_global():
 	URL = "https://covid19.who.int/WHO-COVID-19-global-data.csv"
-	df = pd.read_csv(URL)
+	try:
+		df = pd.read_csv(URL)
+	except:
+		df = pd.read_csv('WHO-COVID-19-global-data.csv')
 
 	df = df.rename(columns = {'Date_reported':'date', 'Country':'location', 'Cumulative_cases':'cases', 'Cumulative_deaths':'deaths'})
 	
